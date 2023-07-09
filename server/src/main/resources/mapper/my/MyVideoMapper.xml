@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibili.server.mapper.my.MyVideoMapper">
+
+    <!--通过分类随机选择指定个数的视频-->
+    <!--limit为-1代表遍历该分类全部-->
+    <select id="selectByVideoCategory" resultType="com.bilibili.server.domain.Video" >
+        select videoID, videoName, videolookTime, videoTime, videoState, videocAtegory, videoImage,
+        videoAddress, videoCollection, videoLeaving,userID,userName,videoDescribe
+        from video
+        <if test="videoCategory != null and videoCategory != '0'">
+            where videocAtegory = #{videoCategory,jdbcType=VARCHAR}
+        </if>
+        <if test="limitNum != null and limitNum != 0">
+            order by rand() limit #{limitNum}
+        </if>
+    </select>
+
+</mapper>

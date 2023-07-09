@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibili.server.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bilibili.server.domain.User">
+    <id column="userID" jdbcType="VARCHAR" property="userID" />
+    <result column="userMingzi" jdbcType="VARCHAR" property="userMingzi" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="usersex" jdbcType="VARCHAR" property="usersex" />
+    <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="userHand" jdbcType="VARCHAR" property="userHand" />
+    <result column="userAddress" jdbcType="VARCHAR" property="userAddress" />
+    <result column="userPhone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="userQQ" jdbcType="VARCHAR" property="userQQ" />
+    <result column="userEmial" jdbcType="VARCHAR" property="userEmial" />
+    <result column="userCollection" jdbcType="VARCHAR" property="userCollection" />
+    <result column="useryinghangka" jdbcType="VARCHAR" property="useryinghangka" />
+    <result column="userState" jdbcType="VARCHAR" property="userState" />
+    <result column="userLoginTime" jdbcType="VARCHAR" property="userLoginTime" />
+    <result column="userIP" jdbcType="VARCHAR" property="userIP" />
+    <result column="userPaypassword" jdbcType="VARCHAR" property="userPaypassword" />
+    <result column="userRMB" jdbcType="VARCHAR" property="userRMB" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userID, userMingzi, userName, usersex, `passWord`, userHand, userAddress, userPhone, 
+    userQQ, userEmial, userCollection, useryinghangka, userState, userLoginTime, userIP, 
+    userPaypassword, userRMB
+  </sql>
+  <select id="selectByExample" parameterType="com.bilibili.server.domain.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userID = #{userID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where userID = #{userID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bilibili.server.domain.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bilibili.server.domain.User">
+    insert into user (userID, userMingzi, userName, 
+      usersex, `passWord`, userHand, 
+      userAddress, userPhone, userQQ, 
+      userEmial, userCollection, useryinghangka, 
+      userState, userLoginTime, userIP, 
+      userPaypassword, userRMB)
+    values (#{userID,jdbcType=VARCHAR}, #{userMingzi,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{usersex,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{userHand,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userQQ,jdbcType=VARCHAR}, 
+      #{userEmial,jdbcType=VARCHAR}, #{userCollection,jdbcType=VARCHAR}, #{useryinghangka,jdbcType=VARCHAR}, 
+      #{userState,jdbcType=VARCHAR}, #{userLoginTime,jdbcType=VARCHAR}, #{userIP,jdbcType=VARCHAR}, 
+      #{userPaypassword,jdbcType=VARCHAR}, #{userRMB,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bilibili.server.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userID != null">
+        userID,
+      </if>
+      <if test="userMingzi != null">
+        userMingzi,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="usersex != null">
+        usersex,
+      </if>
+      <if test="passWord != null">
+        `passWord`,
+      </if>
+      <if test="userHand != null">
+        userHand,
+      </if>
+      <if test="userAddress != null">
+        userAddress,
+      </if>
+      <if test="userPhone != null">
+        userPhone,
+      </if>
+      <if test="userQQ != null">
+        userQQ,
+      </if>
+      <if test="userEmial != null">
+        userEmial,
+      </if>
+      <if test="userCollection != null">
+        userCollection,
+      </if>
+      <if test="useryinghangka != null">
+        useryinghangka,
+      </if>
+      <if test="userState != null">
+        userState,
+      </if>
+      <if test="userLoginTime != null">
+        userLoginTime,
+      </if>
+      <if test="userIP != null">
+        userIP,
+      </if>
+      <if test="userPaypassword != null">
+        userPaypassword,
+      </if>
+      <if test="userRMB != null">
+        userRMB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userID != null">
+        #{userID,jdbcType=VARCHAR},
+      </if>
+      <if test="userMingzi != null">
+        #{userMingzi,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userHand != null">
+        #{userHand,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userQQ != null">
+        #{userQQ,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmial != null">
+        #{userEmial,jdbcType=VARCHAR},
+      </if>
+      <if test="userCollection != null">
+        #{userCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="useryinghangka != null">
+        #{useryinghangka,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        #{userState,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginTime != null">
+        #{userLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userIP != null">
+        #{userIP,jdbcType=VARCHAR},
+      </if>
+      <if test="userPaypassword != null">
+        #{userPaypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userRMB != null">
+        #{userRMB,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bilibili.server.domain.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.userID != null">
+        userID = #{record.userID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMingzi != null">
+        userMingzi = #{record.userMingzi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        userName = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersex != null">
+        usersex = #{record.usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passWord != null">
+        `passWord` = #{record.passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userHand != null">
+        userHand = #{record.userHand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null">
+        userAddress = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        userPhone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userQQ != null">
+        userQQ = #{record.userQQ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmial != null">
+        userEmial = #{record.userEmial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCollection != null">
+        userCollection = #{record.userCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useryinghangka != null">
+        useryinghangka = #{record.useryinghangka,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userState != null">
+        userState = #{record.userState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLoginTime != null">
+        userLoginTime = #{record.userLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIP != null">
+        userIP = #{record.userIP,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPaypassword != null">
+        userPaypassword = #{record.userPaypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRMB != null">
+        userRMB = #{record.userRMB,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set userID = #{record.userID,jdbcType=VARCHAR},
+      userMingzi = #{record.userMingzi,jdbcType=VARCHAR},
+      userName = #{record.userName,jdbcType=VARCHAR},
+      usersex = #{record.usersex,jdbcType=VARCHAR},
+      `passWord` = #{record.passWord,jdbcType=VARCHAR},
+      userHand = #{record.userHand,jdbcType=VARCHAR},
+      userAddress = #{record.userAddress,jdbcType=VARCHAR},
+      userPhone = #{record.userPhone,jdbcType=VARCHAR},
+      userQQ = #{record.userQQ,jdbcType=VARCHAR},
+      userEmial = #{record.userEmial,jdbcType=VARCHAR},
+      userCollection = #{record.userCollection,jdbcType=VARCHAR},
+      useryinghangka = #{record.useryinghangka,jdbcType=VARCHAR},
+      userState = #{record.userState,jdbcType=VARCHAR},
+      userLoginTime = #{record.userLoginTime,jdbcType=VARCHAR},
+      userIP = #{record.userIP,jdbcType=VARCHAR},
+      userPaypassword = #{record.userPaypassword,jdbcType=VARCHAR},
+      userRMB = #{record.userRMB,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bilibili.server.domain.User">
+    update user
+    <set>
+      <if test="userMingzi != null">
+        userMingzi = #{userMingzi,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        usersex = #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        `passWord` = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userHand != null">
+        userHand = #{userHand,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        userAddress = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        userPhone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userQQ != null">
+        userQQ = #{userQQ,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmial != null">
+        userEmial = #{userEmial,jdbcType=VARCHAR},
+      </if>
+      <if test="userCollection != null">
+        userCollection = #{userCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="useryinghangka != null">
+        useryinghangka = #{useryinghangka,jdbcType=VARCHAR},
+      </if>
+      <if test="userState != null">
+        userState = #{userState,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginTime != null">
+        userLoginTime = #{userLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userIP != null">
+        userIP = #{userIP,jdbcType=VARCHAR},
+      </if>
+      <if test="userPaypassword != null">
+        userPaypassword = #{userPaypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userRMB != null">
+        userRMB = #{userRMB,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userID = #{userID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bilibili.server.domain.User">
+    update user
+    set userMingzi = #{userMingzi,jdbcType=VARCHAR},
+      userName = #{userName,jdbcType=VARCHAR},
+      usersex = #{usersex,jdbcType=VARCHAR},
+      `passWord` = #{passWord,jdbcType=VARCHAR},
+      userHand = #{userHand,jdbcType=VARCHAR},
+      userAddress = #{userAddress,jdbcType=VARCHAR},
+      userPhone = #{userPhone,jdbcType=VARCHAR},
+      userQQ = #{userQQ,jdbcType=VARCHAR},
+      userEmial = #{userEmial,jdbcType=VARCHAR},
+      userCollection = #{userCollection,jdbcType=VARCHAR},
+      useryinghangka = #{useryinghangka,jdbcType=VARCHAR},
+      userState = #{userState,jdbcType=VARCHAR},
+      userLoginTime = #{userLoginTime,jdbcType=VARCHAR},
+      userIP = #{userIP,jdbcType=VARCHAR},
+      userPaypassword = #{userPaypassword,jdbcType=VARCHAR},
+      userRMB = #{userRMB,jdbcType=VARCHAR}
+    where userID = #{userID,jdbcType=VARCHAR}
+  </update>
+</mapper>
