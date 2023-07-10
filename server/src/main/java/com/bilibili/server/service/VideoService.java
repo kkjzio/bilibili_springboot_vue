@@ -40,6 +40,7 @@ public class VideoService {
             criteria.andVideocAtegoryEqualTo(String.valueOf(category));
 
         List<Video> videoList = myVideoMapper.selectByVideoCategory(category, limit);
+        System.out.println(videoList.get(0).getVideoID());
         List<VideoDto> VideoDtoList = CopyUtil.copyList(videoList, VideoDto.class);
 
         return VideoDtoList;

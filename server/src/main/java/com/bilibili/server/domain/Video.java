@@ -1,7 +1,7 @@
 package com.bilibili.server.domain;
 
 public class Video {
-    private Integer videoID;
+    private String videoID;
 
     private String videoName;
 
@@ -27,11 +27,11 @@ public class Video {
 
     private String videoDescribe;
 
-    public Integer getVideoID() {
+    public String getVideoID() {
         return videoID;
     }
 
-    public void setVideoID(Integer videoID) {
+    public void setVideoID(String videoID) {
         this.videoID = videoID;
     }
 
