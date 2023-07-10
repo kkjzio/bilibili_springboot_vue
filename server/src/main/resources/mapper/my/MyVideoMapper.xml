@@ -6,7 +6,7 @@
     <!--limit为-1代表遍历该分类全部-->
     <select id="selectByVideoCategory" resultType="com.bilibili.server.domain.Video" >
         select videoID, videoName, videolookTime, videoTime, videoState, videocAtegory, videoImage,
-        videoAddress, videoCollection, videoLeaving,userID,userName,videoDescribe
+        videoAddress, videoCollection, videoLeaving,userID,userName
         from video
         <if test="videoCategory != null and videoCategory != '0'">
             where videocAtegory = #{videoCategory,jdbcType=VARCHAR}

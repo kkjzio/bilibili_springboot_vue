@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="business" />
         <module name="eureka" />
+        <module name="gateway" />
         <module name="server" />
         <module name="system" />
       </profile>
@@ -16,6 +17,7 @@
       <module name="bilibili_springboot_vue" target="1.8" />
       <module name="business" target="1.8" />
       <module name="eureka" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="server" target="1.8" />
       <module name="system" target="1.8" />
     </bytecodeTargetLevel>
