@@ -4,9 +4,7 @@ import com.bilibili.server.dto.BannerDto;
 import com.bilibili.server.dto.ResponseDto;
 import com.bilibili.server.dto.VideoDto;
 import com.bilibili.server.service.VideoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
@@ -103,6 +101,21 @@ public class MainPageController {
         responseDto.setContent(map);
 
         return responseDto;
+    }
+
+    /**
+     *
+     * @param category
+     * @return
+     */
+
+    @PostMapping("/sidebarCategory/{category}")
+    public ResponseDto sidebarCategory(@PathVariable String category){
+        ResponseDto<Object> responseDto = new ResponseDto<>();
+        List<VideoDto> videoDtos = videoService.videoBycategoryWithlimit(category.toCharArray()[0], 7);
+        responseDto.setContent(videoDtos);
+        return responseDto;
+
     }
 
 
